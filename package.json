@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "author": "Ionic Framework",
   "engines": {
-    "node": ">=20.19.0"
+    "node": ">=20.18.2"
   },
   "homepage": "https://ionicframework.com/",
   "scripts": {
