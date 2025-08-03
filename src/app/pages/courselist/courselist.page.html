@@ -1,0 +1,201 @@
+<ion-header mode="md" class="ion-no-border">
+  <ion-toolbar>   
+    <div class="heading">
+      <div class="logo">
+        <div class="bg_img" [style.backgroundImage]='"url(\"" + appLogoPath + "\")"'></div>        
+      </div>
+
+      <div class="btn"> 
+        <ion-buttons slot="start" (click)="gotonotifications()">
+          <div class="carticon"><ion-icon name="notifications-outline" ></ion-icon> 
+            <ion-badge color="danger" *ngIf="ncsCount">{{ncsCount}}</ion-badge>
+          </div>
+         </ion-buttons>    
+        <ion-buttons slot="start" (click)="gotocart()">
+          <div class="carticon"><ion-icon name="cart" ></ion-icon> 
+            <ion-badge color="danger" *ngIf="cartCount">{{cartCount}}</ion-badge>
+          </div>
+         </ion-buttons> 
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>  
+      </div>
+    </div>   
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <div class="ittl2">
+    <ion-label class="ttl1">{{courseconfigdata.course_title}}</ion-label>
+  </div>
+  
+ <div>
+  <ion-slides mode="ios" scrollbar="ios" [options]="slideOptsOne" >
+    <ion-slide>
+      <div class="bg_img" [style.background-image]="'url(\'' + courseconfigdata.course_img + '\')'">
+      </div>
+    </ion-slide>   
+  </ion-slides>
+ </div>
+
+    <p>{{courseconfigdata.short_descriptions}}</p>
+  
+<div class="clsbookoptions" *ngIf="courseconfigdata.subscription_flag=='1'">
+    <div class="ittl2">
+      <ion-label class="ttl1">Subscription</ion-label>
+    </div>
+    <p>{{courseconfigdata.subscription_dtext}}</p>
+    <ion-item button detail="true" (click)="gotoSubsriptionpage()" >
+      <ion-label>
+        <h3>Click here to view all subcriptions</h3>       
+      </ion-label>
+    </ion-item>
+  </div>
+
+  <!-- <div class="clsbookoptions" *ngIf="courseconfigdata.subscription_flag == '1'">
+    <div class="ittl2">
+      <ion-label class="ttl1">Subscription</ion-label>
+    </div>
+    <p>{{courseconfigdata.subscription_retext}}</p>    
+  </div> -->
+    
+    <div class="clsbookoptions" *ngIf="courseconfigdata.booking_classflag=='1'">
+    <div class="ittl2">
+      <ion-label class="ttl1">Book individual classes</ion-label>
+    </div>
+    <p>{{courseconfigdata.bookkingclass_dtexd}}</p>
+    <ion-item button detail="true" (click)="gotoclasslistpage()">
+      <ion-label>
+        <h3>Click here to view all Class Schedule</h3>      
+      </ion-label>
+    </ion-item>
+  </div>
+
+  <div class="clsbookoptions" *ngIf="courseconfigdata.booking_courseflag=='1'">
+    <div class="ittl2">
+      <ion-label class="ttl1">Book whole course</ion-label>
+    </div>
+    <p>{{courseconfigdata.bookingcourse_dtext}}</p>
+    <ion-item button detail="true" (click)="gotocourselistpage()">
+      <ion-label>
+        <h3>Click here to view all course Schedule</h3>      
+       </ion-label>
+    </ion-item>  
+  </div>
+
+  <div class="clsbookoptions" *ngIf="courseconfigdata.courselevelid=='2' && partnerDetails.partner_id == '1'">
+    <div class="ittl2">
+      <ion-label class="ttl1">Book beginners crash course</ion-label>
+    </div>
+    <p>{{courseconfigdata.bookkingclass_dtexd}}</p>
+    <div class="location">
+      <ion-item button detail="false" *ngFor="let item of arrCourseslist" >
+        <ion-label class="ion-text-wrap">
+          <h2><strong>{{item.course_subject}} {{item.course_title}} at {{item.locationtext}}</strong></h2>
+          <ion-row>
+            <ion-col class="ion-text-wrap">
+              <strong>Date & Time:</strong> {{item.course_day}}, {{item.course_date}} {{item.course_time}}
+            </ion-col>       
+          </ion-row>  
+          <ion-row>
+            <ion-col class="ion-text-wrap">
+              <strong>Price: </strong> <ion-badge color="danger">&pound;{{ item.course_price }}</ion-badge>
+            </ion-col>       
+          </ion-row>   
+          <ion-row>
+            <ion-col class="ion-text-wrap">
+              <strong>Duration:</strong> {{item.course_duration}}
+            </ion-col>       
+          </ion-row>        
+          <ion-row>
+            <ion-col class="ion-text-wrap">
+              <strong>Tutors:</strong> {{item.tutorstext}}
+            </ion-col>         
+          </ion-row>
+          
+          <ion-row>
+            <ion-col class="ion-text-wrap">
+              <strong>Location:</strong> {{item.locdetailtext}}
+            </ion-col>         
+          </ion-row>
+  
+          <ion-row>           
+            <ion-col class="ion-text-wrap">
+              <ion-button class="content_button" (click)="classBooking(item)">Book Now</ion-button>
+              </ion-col>
+          </ion-row>   
+         
+        </ion-label>
+        
+      </ion-item>
+  
+     
+    </div>
+  </div>
+
+  <div class="location">
+
+    <ion-item button detail="false" *ngFor="let item of arrClasslist" >
+      <ion-label class="ion-text-wrap">
+        <h2><strong>{{item.course_subject}} {{item.course_title}} at {{item.class_venue}}</strong></h2>
+        <ion-row>
+          <ion-col class="ion-text-wrap">
+            <strong>Date & Time:</strong> {{item.class_day}}, {{item.class_date}} {{item.class_time}}
+          </ion-col>       
+        </ion-row>  
+        <ion-row>
+          <ion-col class="ion-text-wrap">
+            <strong>Class Duration</strong> {{item.class_duration}} Minutes
+          </ion-col>       
+        </ion-row>        
+        <ion-row>
+          <ion-col class="ion-text-wrap">
+            <strong>Tutors:</strong> {{item.class_tutors}}
+          </ion-col>         
+        </ion-row>
+        
+        <ion-row>
+          <ion-col class="ion-text-wrap">
+            <strong>Location:</strong> {{item.locdetailtext}}
+          </ion-col>         
+        </ion-row>
+      </ion-label>
+    </ion-item>
+
+   
+  </div>
+
+</ion-content>
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+
+    <div class="btn">
+
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button (click)="gotohome()">
+          <ion-icon name="storefront" ></ion-icon>
+          <ion-label>Home</ion-label>
+        </ion-tab-button>  
+        
+        <ion-tab-button (click)="gotoweeklyschedule()">
+          <ion-icon name="calendar"></ion-icon>
+          <ion-label>Weekly Schedule</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button (click)="goToTangoEvents()">
+          <ion-icon name="calendar"></ion-icon>
+          <ion-label>Tango Events</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button (click)="gotosubscrition()">
+          <ion-icon name="document-text"></ion-icon>
+          <ion-label>Subscriptions</ion-label>
+        </ion-tab-button>       
+
+      </ion-tab-bar>
+
+    </div>
+
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,115 @@
+ion-header {
+    ion-toolbar {
+      --background: #f3f3f3; 
+  
+      .heading {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+  
+        .logo {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+  
+          .bg_img {
+            height: 80px;
+            width: 80px;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+          }
+  
+          ion-label {
+            font-family: 'bold';
+            margin-left: 10px;
+          }
+        }
+  
+        .btn {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+  
+          ion-buttons {
+            ion-button {
+              border-radius: 100px;
+              height: 35px;
+              width: 35px;
+              background: #c33131;
+  
+              ion-icon {
+                color: white;
+              }
+            }
+  
+            ion-menu-button {
+              border-radius: 100px;
+              height: 35px;
+              width: 35px;
+              background: #c33131;
+              color: white;            
+            }
+          }
+        }
+      }
+  
+      .searchbar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        background-color: #c33131 !important;
+        color: #ffffff !important;
+  
+        ion-searchbar {
+          padding: 0px;
+          margin: 0px 10px;
+        }
+      }
+    }
+  }
+  ion-card{
+    background-color: #f3f3f3 !important;
+    color: #000 !important;
+
+    ion-card-title{
+      color: #c33131 !important;
+      font-weight: bold;
+    }
+
+  }
+
+
+  ion-content{
+
+    .maindiv{
+
+      ion-button {
+        border-radius: 100px;      
+        --background: #c33131;    
+        ion-icon {
+          color: white;
+        }
+      }
+
+      ion-button.btncancel {
+        margin-top: 10px;
+        border-radius: 100px;      
+        --background: #f3f3f3;   
+        color: #000; 
+        ion-icon {
+          color: white;
+        }
+      }
+
+    }
+    .erros_reg{
+      color: #ff0000;
+    }
+
+}
+
+
+

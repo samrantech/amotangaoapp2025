@@ -1,0 +1,151 @@
+<ion-header mode="ios" class="ion-no-border">
+  <ion-toolbar>
+    <div class="logo">
+      <ion-title class="h5"><span>Booking</span></ion-title>
+    </div>
+    <ion-buttons slot="end">
+      <ion-button (click)="onClose()" color="dark">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <div class="location">
+
+    <div *ngIf="itemCategory == 'subscription'">
+      <ion-item detail="false" >
+        <ion-label class="ion-text-wrap">
+          <h2><strong>{{ subscriptionData.item_name }}</strong></h2>    
+          <ion-row>
+            <ion-col class="ion-text-wrap">
+              <strong>Price:</strong> <ion-badge color="danger" [innerHTML]="partnerDetails.currency_symbol + subscriptionData.item_price"></ion-badge> {{ subscriptionData.item_plan_disp_text }} 
+            </ion-col>             
+          </ion-row>                      
+        </ion-label>
+      </ion-item>  
+      <ion-item button detail="false" >
+        <ion-label class="ion-text-wrap">        
+          <p> Your Subscription will start from <b>{{substdate | date}}</b>. If you wish to change the starting date please select the date from tbe below </p>                      
+        </ion-label>
+      </ion-item> 
+      <ion-list>
+        <ion-item id="open-modal2">
+          <ion-label>Subscription Start Date</ion-label>
+          <ion-note slot="end">{{substdate | date}}</ion-note>
+        </ion-item>
+        <ion-modal trigger="open-modal2" [cssClass]="'bottom-end'">
+          <ng-template>
+            <ion-datetime
+              presentation="date"
+              [(ngModel)]="substdate"
+              size="cover"
+              [showDefaultButtons]="true"
+            ></ion-datetime>
+          </ng-template> </ion-modal
+      ></ion-list> 
+    </div>
+
+
+    <div *ngIf="itemCategory == 'eventbooking'">
+      <ion-item  detail="false" >
+        <ion-label class="ion-text-wrap">
+          <h2><strong>{{ eventBookingData.item_name }}</strong></h2>    
+          <ion-row>
+            <ion-col class="ion-text-wrap">
+              <strong>Price:</strong> <ion-badge color="danger" [innerHTML]="partnerDetails.currency_symbol + eventBookingData.item_price"></ion-badge>
+            </ion-col>             
+          </ion-row>                      
+        </ion-label>
+      </ion-item>       
+    </div>
+
+    <div *ngIf="itemCategory == 'classbooking'">
+      <ion-item  detail="false" >
+        <ion-label class="ion-text-wrap">
+          <h2><strong>{{ classBookingData.item_name }}</strong></h2>    
+          <ion-row>
+            <ion-col class="ion-text-wrap">
+              <strong>Price:</strong> <ion-badge color="danger" [innerHTML]="partnerDetails.currency_symbol + classBookingData.item_price"></ion-badge>
+            </ion-col>             
+          </ion-row>                      
+        </ion-label>
+      </ion-item>       
+    </div>
+
+    <div *ngIf="itemCategory == 'coursebooking'">
+      <ion-item detail="false" >
+        <ion-label class="ion-text-wrap">
+          <h2><strong>{{ classBookingData.item_name }}</strong></h2>    
+          <ion-row>
+            <ion-col class="ion-text-wrap">
+              <strong>Price:</strong> <ion-badge color="danger" [innerHTML]="partnerDetails.currency_symbol + classBookingData.item_price"></ion-badge>
+            </ion-col>             
+          </ion-row>                      
+        </ion-label>
+      </ion-item>       
+    </div>
+
+
+    <div *ngIf="itemCategory == 'workshopbooking'">
+      <ion-item  detail="false" >
+        <ion-label class="ion-text-wrap">
+          <h2><strong>{{ workshopBookingData.item_name }}</strong></h2>    
+          <ion-row>
+            <ion-col class="ion-text-wrap">
+              <strong>Price:</strong> <ion-badge color="danger" [innerHTML]="partnerDetails.currency_symbol + workshopBookingData.item_price"></ion-badge>
+            </ion-col>             
+          </ion-row>   
+          <ion-row>
+            <ion-col class="ion-text-wrap">
+              <strong>Total Booking Place(s):</strong> {{ workshopBookingData.item_qty }} 
+            </ion-col>             
+          </ion-row> 
+          
+
+          <div *ngIf="workshopBookingData.place_split_flag == 1">
+          <ion-row class="itemqty">
+            <ion-col class="ion-text-wrap">
+              <strong>Follower Place(s):</strong>
+          <div class="btn">
+            <ion-icon name="remove" (click) = "addUpdateCartQty('followers',1)" ></ion-icon>
+            <ion-label>{{ workshopBookingData.item_qty_followers }}</ion-label>
+            <ion-icon name="add" (click) = "addUpdateCartQty('followers',2)"></ion-icon>
+          </div>
+          <p>Places Available: {{ workshopBookingData.favailable_qty }}</p>
+        </ion-col>             
+      </ion-row> 
+
+      <ion-row class="itemqty">
+        <ion-col class="ion-text-wrap">
+          <strong>Leader Place(s):</strong>
+      <div class="btn">
+        <ion-icon name="remove" (click) = "addUpdateCartQty('leaders',1)" ></ion-icon>
+        <ion-label>{{ workshopBookingData.item_qty_leaders }}</ion-label>
+        <ion-icon name="add" (click) = "addUpdateCartQty('leaders',2)"></ion-icon>
+      </div>
+      <p>Places Available: {{ workshopBookingData.ledavailable_qty }}</p>
+    </ion-col>  
+  </ion-row> 
+</div>
+        </ion-label>
+      </ion-item>       
+    </div>
+       
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    <div class="btn">
+      <ion-button class="contentbtn" fill="outline" expand="block" (click)="onClose()">
+        Cancel
+      </ion-button>
+      <ion-button class="contentbtn" expand="block" (click)="addToCart()">
+        Proceed
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

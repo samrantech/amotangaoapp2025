@@ -1,0 +1,72 @@
+<ion-header mode="md" class="ion-no-border">
+  <ion-toolbar>   
+    <div class="heading">
+      <ion-buttons slot="start">
+        <ion-button (click)="onBack()">
+          <ion-icon name="chevron-back"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <div class="logo">
+        <ion-title class="h5">Tango Courses</ion-title>
+      </div>
+      <div class="btn">  
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>  
+      </div>
+    </div>   
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+
+  <div class="ittl2">
+    <ion-label class="ttl1">{{  cfilterdata.course_subject }} {{  cfilterdata.course_level }}  </ion-label>    
+  </div>
+  <p>We have new {{  cfilterdata.course_level }} courses starting regularly in all our Central London locations. You can see the schedule in the timetable below. </p>
+
+
+  <div class="location">
+    <ion-item button detail="false" *ngFor="let item of arrClasslist" >
+      <ion-label class="ion-text-wrap">
+        <h2><strong>{{item.course_subject}} {{item.course_title}} at {{item.locationtext}}</strong></h2>
+        <ion-row>
+          <ion-col class="ion-text-wrap">
+            <strong>Date & Time:</strong> {{item.course_day}}, {{item.course_date}} {{item.course_time}}
+          </ion-col>       
+        </ion-row>  
+        <ion-row>
+          <ion-col class="ion-text-wrap">
+            <strong>Price: </strong> <ion-badge color="danger">&pound;{{ item.course_price }}</ion-badge>
+          </ion-col>       
+        </ion-row>   
+        <ion-row>
+          <ion-col class="ion-text-wrap">
+            <strong>Duration:</strong> {{item.course_duration}}
+          </ion-col>       
+        </ion-row>        
+        <ion-row>
+          <ion-col class="ion-text-wrap">
+            <strong>Tutors:</strong> {{item.tutorstext}}
+          </ion-col>         
+        </ion-row>
+        
+        <ion-row>
+          <ion-col class="ion-text-wrap">
+            <strong>Location:</strong> {{item.locdetailtext}}
+          </ion-col>         
+        </ion-row>
+
+        <ion-row>           
+          <ion-col class="ion-text-wrap">
+            <ion-button class="content_button" (click)="classBooking(item)">Book Now</ion-button>
+            </ion-col>
+        </ion-row>   
+       
+      </ion-label>
+      
+    </ion-item>
+
+   
+  </div>
+
+</ion-content>

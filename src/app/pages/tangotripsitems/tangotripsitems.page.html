@@ -1,0 +1,134 @@
+<ion-header>
+  <ion-toolbar>   
+    <div class="heading">
+      <ion-buttons slot="start">
+        <ion-button (click)="onBack()">
+          <ion-icon name="chevron-back"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <div class="logo">
+        <ion-title class="h5">Tango Trip Details</ion-title>
+      </div>
+      <div class="btn">  
+        <ion-buttons slot="start" (click)="gotocart()">
+          <div class="carticon"><ion-icon name="cart" ></ion-icon> 
+            <ion-badge color="danger" *ngIf="cartCount">{{cartCount}}</ion-badge>
+          </div>
+         </ion-buttons>   
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>  
+      </div>
+    </div>   
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-padding"> 
+    <div class="ittl2">
+    <ion-label class="ttl1">{{ cpagedata.page_title }}</ion-label>
+  </div>
+  <ion-slides mode="ios" scrollbar="ios" [options]="slideOptsOne" *ngIf="cpagedata.page_fimageurl">
+    <ion-slide>
+      <div class="bg_img" [style.background-image]="'url(\'' + cpagedata.page_fimageurl + '\')'">
+      </div>
+    </ion-slide>   
+  </ion-slides>
+
+  <div [innerHTML]="cpagedata.page_content"></div>
+  
+  <div class="location">
+
+    <div *ngIf="activesbscount <= 0">
+    <ion-item  detail="false" *ngFor="let item of arrEventsList" >
+      <ion-label class="ion-text-wrap">
+        <h2><strong>{{ item.cart_disp_name }}</strong></h2>  
+        <ion-row>
+          <ion-col class="ion-text-wrap">
+            <strong>Date & Time:</strong> {{ item.stdatetext }} , {{ item.wtimte }} 
+          </ion-col>             
+        </ion-row>        
+        <ion-row>
+          <ion-col class="ion-text-wrap">
+            <strong>Location:</strong> {{ item.locatointext }} 
+          </ion-col>             
+        </ion-row> 
+        <ion-row>
+          <ion-col class="ion-text-wrap">
+            <strong>Price:</strong><ion-badge color="danger">&pound;{{ item.price }} </ion-badge>
+          </ion-col>             
+        </ion-row> 
+        <ion-row *ngIf="item.split_flag == 1">           
+          <ion-col class="ion-text-wrap">
+            <strong>Places available:</strong>
+            Leaders - {{ (item.leader_capacity > 0) ? item.leader_capacity : 'Fully Booked'  }} | Followers - {{ (item.followers_capacity > 0) ? item.followers_capacity : 'Fully Booked' }}
+            </ion-col>
+        </ion-row> 
+        <ion-row *ngIf="item.split_flag == 0 && item.available_qty > 0">           
+          <ion-col class="ion-text-wrap">
+            <strong>Places available:</strong>{{  item.available_qty }}           
+            </ion-col>
+        </ion-row> 
+        <ion-row *ngIf="item.available_qty > 0">           
+          <ion-col class="ion-text-wrap">
+            <ion-button class="content_button" (click)="goToModel(item)">Book Now</ion-button>
+            </ion-col>
+        </ion-row> 
+        <ion-row *ngIf="item.available_qty <= 0">           
+          <ion-col class="ion-text-wrap">
+            <ion-button class="content_button">Fully Booked</ion-button>
+            </ion-col>
+        </ion-row>               
+      </ion-label>
+    </ion-item>  
+    </div>
+
+
+    <div *ngIf="activesbscount > 0">
+      <ion-item  detail="false" *ngFor="let item of arrSubsEventsList" >
+        <ion-label class="ion-text-wrap">
+          <h2><strong>{{ item.cart_disp_name }}</strong></h2>  
+          <ion-row>
+            <ion-col class="ion-text-wrap">
+              <strong>Date & Time:</strong> {{ item.stdatetext }} , {{ item.wtimte }} 
+            </ion-col>             
+          </ion-row>        
+          <ion-row>
+            <ion-col class="ion-text-wrap">
+              <strong>Location:</strong> {{ item.locatointext }} 
+            </ion-col>             
+          </ion-row> 
+          <ion-row>
+            <ion-col class="ion-text-wrap">
+              <strong>Price:</strong><ion-badge color="danger">&pound;{{ item.price }} </ion-badge>
+            </ion-col>             
+          </ion-row> 
+          <ion-row *ngIf="item.split_flag == 1">           
+            <ion-col class="ion-text-wrap">
+              <strong>Places available:</strong>
+              Leaders - {{ (item.leader_capacity > 0) ? item.leader_capacity : 'Fully Booked'  }} | Followers - {{ (item.followers_capacity > 0) ? item.followers_capacity : 'Fully Booked' }}
+              </ion-col>
+          </ion-row> 
+          <ion-row *ngIf="item.split_flag == 0 && item.available_qty > 0">           
+            <ion-col class="ion-text-wrap">
+              <strong>Places available:</strong>{{  item.available_qty }}           
+              </ion-col>
+          </ion-row> 
+          <ion-row *ngIf="item.available_qty > 0">           
+            <ion-col class="ion-text-wrap">
+              <ion-button class="content_button" (click)="goToModel(item)">Book Now</ion-button>
+              </ion-col>
+          </ion-row> 
+          <ion-row *ngIf="item.available_qty <= 0">           
+            <ion-col class="ion-text-wrap">
+              <ion-button class="content_button">Fully Booked</ion-button>
+              </ion-col>
+          </ion-row>               
+        </ion-label>
+      </ion-item>  
+      </div>
+
+    
+
+  </div>
+</ion-content>

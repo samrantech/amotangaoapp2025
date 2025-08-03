@@ -1,0 +1,72 @@
+.toppaddinghome{
+  margin-top: 5px;
+}
+.profile-picture{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-family: 'bold';
+  margin-bottom: 20px;
+}
+
+ion-item {
+  --background: white;
+  border-radius: 100px;
+  border: 1px solid var(--ion-color-medium);
+  margin: 10px 0px;
+}
+
+.remember {
+  margin: 10px 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  ion-checkbox {
+    margin-right: 10px;
+  }
+}
+
+.title {
+  margin: 10px 0px 10px 20px;
+}
+
+.btn { 
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  --color: var(--ion-color-primary);
+}
+
+.content_button {
+  margin-top: 50px;
+}
+
+.signup {
+ 
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 10px;
+
+  .heading {
+    font-family: "bold";
+  }
+
+  .sub_heading {
+    margin-top: 0px;
+  }
+
+  ion-button {   
+    color: var(--ion-color-primary);
+  }
+}
+.erros_reg{
+  color:#ff0000;
+}
+ion-icon{
+  background-color: #ffffff;
+  color: var(--ion-color-primary);
+}

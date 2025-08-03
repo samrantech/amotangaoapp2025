@@ -1,0 +1,189 @@
+<ion-header mode="md" class="ion-no-border">
+  <ion-toolbar>   
+    <div class="heading">
+      <div class="logo">
+        <div class="bg_img" [style.backgroundImage]='"url(\"" + appLogoPath + "\")"'></div>
+      </div>
+
+      <div class="btn">
+        <ion-buttons slot="start" (click)="gotonotifications()">
+          <div class="carticon"><ion-icon name="notifications-outline" ></ion-icon> 
+            <ion-badge color="danger" *ngIf="ncsCount">{{ncsCount}}</ion-badge>
+          </div>
+         </ion-buttons>  
+        <ion-buttons slot="start" (click)="gotocart()">
+          <div class="carticon"><ion-icon name="cart" ></ion-icon> 
+            <ion-badge color="danger" *ngIf="cartCount">{{cartCount}}</ion-badge>
+          </div>
+         </ion-buttons>   
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>  
+      </div>
+    </div>   
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+ 
+  <div class="main-content">
+    <div class="pro">
+     
+      <ion-list>
+        <h5 class="main_head"><b>5X5 Mapping</b></h5>
+          <ion-button size="small" class="content_button create_btn" *ngIf="resubs == 1" (click)="oncreatenew()" expand="block">
+            Create New
+          </ion-button>
+          <ion-button size="small" class="content_button create_btn" *ngIf="part_section == 1" (click)="onback()" expand="block">
+            Back
+          </ion-button>
+       
+      </ion-list>
+      <div class="mapping_msg" *ngIf="resubs == 1">
+        <p class="text-center">5X5 System is a mapping system to unleash the creativity of leaders. Please start by creating your system.</p>
+      </div>
+      <div class="mapping_msg" *ngIf="substatus == 1">
+        <p class="text-center">5X5 System is a mapping system to unleash the creativity of leaders. Currently it is available for subscribers only. Please contact your teacher or email <a href="mailto:info@tango-amistoso.co.uk">info@tango-amistoso.co.uk</a> for any queries.</p>
+      </div>
+      <div *ngIf="crud_section == 1">
+
+      <p class="erros_reg" id="euexperience"></p>
+      <ion-label class="title">Title</ion-label>
+      <ion-item lines="none" class="ion_input_item">
+        <ion-input class="tilte" type="text" value="{{userdata.title}}" placeholder="" (ionChange)="fnOnchangeinput($event)" id="title" name="title" ></ion-input>
+      </ion-item>
+      <div class="filter_section">
+        
+        <ion-label class="level">Filter by Level:</ion-label>
+        <div class="filter-flex">
+          <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="onSearchChange($event)" placeholder="Search by Keyword..."></ion-searchbar>
+          <ion-item lines="none" class="ion_input_item">
+            <ion-select placeholder="Select Level" (ionChange)="fnOnchangefilterlevel($event)" id="filterlevel" name="filterlevel" [(ngModel)]="filterlevel">
+                <ion-select-option *ngFor="let courselevel of courselevels" value="{{courselevel.id}}"> 
+                  {{courselevel.Level_title}}
+                </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </div>
+      </div>
+       <p class="crud_check_title">Choose your key concepts and key options from the list below</p>
+     
+     <div class="checkbox" *ngFor="let item of arrkeyoptions; index as i;">
+      <ion-item>
+      <div>
+        <ion-checkbox [checked]="isChecked(item.id)" value="{{item.id}}" (ionChange)="fnOnchangecheckbox($event)" id="reason{{item.id}}"></ion-checkbox>
+      </div>
+        <div>
+          <ion-label>{{ i+1 }}. {{item.name}}</ion-label>
+          <h6 class="dis_level">{{item.level}}</h6>
+          <h6 class="dis_description">{{item.description}}</h6>
+          <a class="dis_description" href="{{item.media_source}}" *ngIf="item.media_source">View Video Tutorial</a>
+      </div>
+      </ion-item>
+      <div class="checkbox sub_div" *ngFor="let items of item.options; index as j;">
+        <ion-item>
+          <div>
+          <ion-checkbox [checked]="isCheckedoptions(items.id)" value="{{items.id}}" (ionChange)="fnOnchangecheckboxoptions($event)" id="reasonoptions{{items.id}}"></ion-checkbox>
+          </div>
+          <div>
+            <ion-label>{{items.title}}</ion-label>
+            <h6 class="dis_description">{{items.short_description}}</h6>
+            <a class="dis_description" href="{{items.media_source}}" *ngIf="items.media_source">View Video Tutorial</a>  
+          </div>
+        </ion-item>
+      </div>
+    </div>
+     <ion-button (click)="prevPage()" [disabled]="currentPage === 1">Prev</ion-button>
+
+<ng-container *ngFor="let page of [].constructor(pagination.last_page); let i = index">
+  <ion-button
+    [color]="currentPage === i + 1 ? 'primary' : 'light'"
+    (click)="fngetuserpartnersearch(i + 1)">
+    {{ i + 1 }}
+  </ion-button>
+</ng-container>
+
+<ion-button (click)="nextPage()" [disabled]="currentPage === pagination.last_page">Next</ion-button>
+      <ion-footer class="ion-no-border">
+        <ion-toolbar>
+          <ion-button size="small" class="content_button" (click)="onSave()" expand="block">
+            Submit
+          </ion-button>
+        </ion-toolbar>
+      </ion-footer>
+    </div>
+    </div>  
+    <div class="partners" *ngIf="resubs == 1">
+    <div class="bg_img"></div>
+    
+      <ion-card *ngFor="let item of arrUserpartners; index as i;">
+        <ion-card-header>
+       
+          <ion-card-title>{{item.title}}</ion-card-title>
+          <!-- <ion-card-subtitle>{{item.experience}}</ion-card-subtitle> -->
+        </ion-card-header>
+      
+      
+        <ion-row>           
+          <ion-col class="view_btn">
+            <ion-button class="content_button" (click)="onView(item)" size="small">View</ion-button>
+            <ion-button class="content_button" (click)="onEdit(item)" size="small">Edit</ion-button>
+            <ion-button class="content_button" (click)="onremove(item)" size="small">Remove</ion-button>
+            </ion-col>
+        </ion-row>     
+      </ion-card>
+   
+    </div>
+    <div class="matched_partners" *ngIf="viewconcept == 1">
+      <ion-card *ngFor="let item of arrkeymappings; index as i;">
+        <ion-card-header>
+         
+          <ion-card-title class="card_title">{{item.title}}</ion-card-title>
+          <ion-card-subtitle></ion-card-subtitle>
+        </ion-card-header>
+      
+        <ion-card-content *ngFor="let items of item.key_concept | keyvalue; index as j;">
+          <p class="key_concept">{{j+1}}. {{items.value.name}}</p>
+          <span class="key_concept_desc">{{items.value.description}}</span>  <a class="dis_description" href="{{items.value.media_source}}" *ngIf="items.value.media_source"> View Video Tutorial</a>
+   
+          <h6 class="">{{items.value.level}}</h6>
+       
+          <div *ngFor="let val of items.value.options | keyvalue">
+            <p class="key_con_option">{{val.value.title}}</p>
+            <span class="key_concept_opt_desc" *ngIf="val.value.short_description">{{val.value.short_description}} </span>  <a class="dis_description" href="{{val.value.media_source}}" *ngIf="val.value.media_source"> View Video Tutorial</a>
+          </div> 
+        </ion-card-content>
+      </ion-card>
+  
+      
+    </div>  
+  </div>
+</ion-content>
+<ion-footer class="ion-no-border">
+  <!--<ion-toolbar>
+    <div class="btn">
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button (click)="gotoprofile()">
+          <ion-icon name="storefront" ></ion-icon>
+          <ion-label>Profile</ion-label>
+        </ion-tab-button>    
+          
+        <ion-tab-button (click)="gotopartner()" *ngIf="part_section == 1">
+          <ion-icon name="person-outline"></ion-icon>
+          <ion-label>Partners</ion-label>
+        </ion-tab-button>
+       
+        <ion-tab-button (click)="gotomatched()" *ngIf="part_section == 1">
+          <ion-icon name="people-outline"></ion-icon>
+          <ion-label>Matched Partners</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button (click)="togosubscriptions()">
+          <ion-icon name="document-text"></ion-icon>
+          <ion-label>Subscriptions</ion-label>
+        </ion-tab-button> 
+      
+      </ion-tab-bar>
+    </div>
+  </ion-toolbar>-->
+</ion-footer> 

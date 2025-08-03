@@ -1,0 +1,70 @@
+<ion-header mode="md" class="ion-no-border">
+  <ion-toolbar>   
+    <div class="heading">
+      <div class="logo">
+        <div class="bg_img" [style.backgroundImage]='"url(\"" + appLogoPath + "\")"'></div>        
+      </div>
+
+      <div class="btn">
+        <ion-buttons slot="start" (click)="gotonotifications()">
+          <div class="carticon"><ion-icon name="notifications-outline" ></ion-icon> 
+            <ion-badge color="danger" *ngIf="ncsCount">{{ncsCount}}</ion-badge>
+          </div>
+         </ion-buttons>  
+        <ion-buttons slot="start" (click)="gotocart()">
+          <div class="carticon"><ion-icon name="cart" ></ion-icon> 
+            <ion-badge color="danger" *ngIf="cartCount">{{cartCount}}</ion-badge>
+          </div>
+         </ion-buttons>   
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>  
+      </div>
+    </div>   
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding"> 
+
+  <div class="content3">
+    
+    <div class="bg_img" [style.backgroundImage]= '"url(\"" + item.menu_imgurl + "\")"' *ngFor="let item of arrOurclasses" (click)="onLoadcoursepage(item)">
+      <div class="text">
+        <ion-label class="h4">{{item.menu_title}}</ion-label>
+        <ion-button class="content_button">
+          Book
+        </ion-button> 
+      </div>
+    </div>
+  </div>
+
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    <div class="btn">
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button (click)="gotohome()">
+          <ion-icon name="storefront" ></ion-icon>
+          <ion-label>Home</ion-label>
+        </ion-tab-button>  
+        
+        <ion-tab-button (click)="gotoweeklyschedule()">
+          <ion-icon name="calendar"></ion-icon>
+          <ion-label>Weekly Schedule</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button (click)="goToTangoEvents()">
+          <ion-icon name="calendar" color="primary"></ion-icon>
+          <ion-label>Tango Events</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button (click)="togosubscriptions()">
+          <ion-icon name="document-text"></ion-icon>
+          <ion-label>Subscriptions</ion-label>
+        </ion-tab-button>
+
+      
+      </ion-tab-bar>
+    </div>
+  </ion-toolbar>
+</ion-footer>

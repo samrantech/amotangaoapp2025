@@ -1,0 +1,162 @@
+<ion-header mode="md" class="ion-no-border">
+  <ion-toolbar>   
+    <div class="heading">
+      <div class="logo">
+        <div class="bg_img" [style.backgroundImage]='"url(\"" + appLogoPath + "\")"'></div>
+      </div>
+
+      <div class="btn">
+        <ion-buttons slot="start" (click)="gotonotifications()">
+          <div class="carticon"><ion-icon name="notifications-outline" ></ion-icon> 
+            <ion-badge color="danger" *ngIf="ncsCount">{{ncsCount}}</ion-badge>
+          </div>
+         </ion-buttons>  
+        <ion-buttons slot="start" (click)="gotocart()">
+          <div class="carticon"><ion-icon name="cart" ></ion-icon> 
+            <ion-badge color="danger" *ngIf="cartCount">{{cartCount}}</ion-badge>
+          </div>
+         </ion-buttons>   
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>  
+      </div>
+    </div>   
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <h5><b>Manage 5X5 Mapping Options</b></h5>
+  <div class="main-content">
+    <div class="pro">
+     
+      <ion-row>           
+        <ion-col class="view_btn">
+        <ion-button size="small" class="content_button create_btn" *ngIf="resubs == 1" (click)="onbacktolist()" expand="block">
+          Back to list
+        </ion-button>
+          <ion-button size="small" class="content_button create_btn" *ngIf="resubs == 1" (click)="oncreatenew()" expand="block">
+            Create New
+          </ion-button>
+          <ion-button size="small" class="content_button create_btn" *ngIf="part_section == 1" (click)="onback()" expand="block">
+            Back
+          </ion-button>
+        <br>
+      </ion-col>
+    </ion-row>
+      <div *ngIf="crud_section == 1">
+
+      <p class="erros_reg" id="euexperience"></p>
+      <ion-label class="etitle">Title</ion-label>
+      <ion-item lines="none">
+        <ion-input type="text" value="{{userdata.etitle}}" placeholder="" (ionChange)="fnOnchangeinput($event)" id="etitle" name="etitle" ></ion-input>
+      </ion-item>
+      <ion-label class="short_description">Description</ion-label>
+      <ion-item>
+        <ion-textarea placeholder="" (ionChange)="fnOnchangeinput($event)" id="short_description" value="{{userdata.short_description}}"></ion-textarea>
+      </ion-item>
+      <ion-label class="media_source">Video source</ion-label>
+      <ion-item>
+        <ion-textarea placeholder="" (ionChange)="fnOnchangeinput($event)" id="media_source" value="{{userdata.media_source}}"></ion-textarea>
+      </ion-item>
+     
+    <ion-label class="active_status">Status</ion-label>
+  <ion-item lines="none">
+    <ion-select placeholder="Select status" (ionChange)="fnOnchangeinput($event)" id="active_status" name="active_status" [(ngModel)]="userdata.active_status">
+        <ion-select-option *ngFor="let gender of genderlist" value="{{gender.gender_name}}"> 
+          {{gender.gender_name}}
+        </ion-select-option>
+     </ion-select>
+</ion-item>
+<ion-label class="active_status">Display property</ion-label>
+<ion-item lines="none">
+  <ion-select placeholder="-- Select --" (ionChange)="fnOnchangeinput($event)" id="display_status" name="display_status" [(ngModel)]="userdata.display_status">
+      <ion-select-option value="1"> Private</ion-select-option>
+      <ion-select-option value="2"> Public</ion-select-option>
+   </ion-select>
+</ion-item>
+      <ion-footer class="ion-no-border">
+        <ion-toolbar>
+          <ion-button class="content_button" (click)="onSave()" expand="block">
+            Submit
+          </ion-button>
+        </ion-toolbar>
+      </ion-footer>
+    </div>
+    </div>  
+    <div class="partners" *ngIf="resubs == 1">
+    <div class="bg_img"></div> 
+    <div class="filter_section">
+        
+      <ion-label class="level">Filter:</ion-label>
+   
+     <ion-item lines="none">
+        <ion-select placeholder="Status" (ionChange)="fnOnchangefilterlevel($event)" id="filterstatus" name="filterstatus" [(ngModel)]="filterstatus">
+          <ion-select-option  *ngFor="let cData of arrDobmonth;index as i" value="{{cData}}">{{cData}}</ion-select-option> 
+         </ion-select>
+    </ion-item>
+    </div>
+      <ion-card *ngFor="let item of arrkeyoptions; index as i;">
+        <ion-card-header>
+       
+          <ion-card-title>{{i+1}}. {{item.title}}</ion-card-title>
+          <ion-card-subtitle>{{item.short_description}}</ion-card-subtitle> 
+        </ion-card-header>
+      
+      
+        <ion-row>           
+          <ion-col class="view_btn">
+           <ion-button size="small" class="content_button" (click)="onEdit(item)">Edit</ion-button>
+            <ion-button size="small" class="content_button" (click)="onremove(item)">Delete</ion-button>
+            </ion-col>
+        </ion-row>     
+      </ion-card>
+   
+    </div>
+    <div class="matched_partners" *ngIf="viewconcept == 1">
+      <ion-card *ngFor="let item of arrkeymappings; index as i;">
+        <ion-card-header>
+         
+          <ion-card-title class="card_title">{{item.title}}</ion-card-title>
+          <ion-card-subtitle></ion-card-subtitle>
+        </ion-card-header>
+      
+        <ion-card-content *ngFor="let items of item.key_concept | keyvalue; index as j;">
+          <p class="key_concept">{{j+1}}. {{items.value.name}}</p>
+          <div *ngFor="let val of items.value.options | keyvalue">
+            <p class="key_con_option">{{val.value.title}}</p>
+          </div> 
+        </ion-card-content>
+      </ion-card>
+  
+      
+    </div>  
+  </div>
+</ion-content>
+<ion-footer class="ion-no-border">
+  <!--<ion-toolbar>
+    <div class="btn">
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button (click)="gotoprofile()">
+          <ion-icon name="storefront" ></ion-icon>
+          <ion-label>Profile</ion-label>
+        </ion-tab-button>    
+          
+        <ion-tab-button (click)="gotopartner()" *ngIf="part_section == 1">
+          <ion-icon name="person-outline"></ion-icon>
+          <ion-label>Partners</ion-label>
+        </ion-tab-button>
+       
+        <ion-tab-button (click)="gotomatched()" *ngIf="part_section == 1">
+          <ion-icon name="people-outline"></ion-icon>
+          <ion-label>Matched Partners</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button (click)="togosubscriptions()">
+          <ion-icon name="document-text"></ion-icon>
+          <ion-label>Subscriptions</ion-label>
+        </ion-tab-button> 
+      
+      </ion-tab-bar>
+    </div>
+  </ion-toolbar>-->
+</ion-footer> 

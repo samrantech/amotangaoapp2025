@@ -1,0 +1,107 @@
+ion-header {
+    ion-toolbar {
+      --background: #f3f3f3; 
+  
+      .heading {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+  
+        .logo {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+  
+          .bg_img {
+            height: 80px;
+            width: 110px;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: contain;
+          }
+  
+          ion-label {
+            font-family: 'bold';
+            margin-left: 10px;
+          }
+        }
+  
+        .btn {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+  
+          ion-buttons {
+            ion-button {
+              border-radius: 100px;
+              height: 35px;
+              width: 35px;
+              background: #c33131;
+  
+              ion-icon {
+                color: white;
+              }
+            }
+  
+            ion-menu-button {
+              border-radius: 100px;
+              height: 35px;
+              width: 35px;
+              background: #c33131;
+              color: white;            
+            }
+          }
+        }
+      }
+  
+      .searchbar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        background-color: #c33131 !important;
+        color: #ffffff !important;
+  
+        ion-searchbar {
+          padding: 0px;
+          margin: 0px 10px;
+        }
+      }
+    }
+  }
+
+
+  
+  .location{
+    padding-bottom:20px;
+    ion-item:nth-child(1) {
+      --background:#fdd6cd;
+        margin-bottom: 5px;
+
+        p {
+          color: #000000 !important;
+        }
+    }  
+    ion-item:nth-child(odd) {
+      --background:#f3f3f3;
+      margin-bottom: 5px;
+
+      p {
+        color: #000000 !important;
+      }
+    }
+    ion-item:nth-child(even) {
+      --background:#fdd6cd;
+      margin-bottom: 5px;
+
+      p {
+        color: #000000 !important;
+      }
+    
+    }
+  }
+
+  .ittl2{
+    margin-bottom: 15px;
+  }

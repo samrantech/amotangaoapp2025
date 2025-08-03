@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar>   
+    <div class="heading">
+      <ion-buttons slot="start">
+        <ion-button (click)="onBack()">
+          <ion-icon name="chevron-back"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <div class="logo">
+        <ion-title class="h5 ion-text-wrap">Attendee details</ion-title>
+      </div>
+      <div class="btn">  
+        <ion-buttons slot="start" (click)="gotonotifications()">
+          <div class="carticon"><ion-icon name="notifications-outline" ></ion-icon> 
+            <ion-badge color="danger" *ngIf="ncsCount">{{ncsCount}}</ion-badge>
+          </div>
+         </ion-buttons> 
+        <ion-buttons slot="start" (click)="gotocart()">
+          <div class="carticon"><ion-icon name="cart" ></ion-icon> 
+            <ion-badge color="danger" *ngIf="cartCount">{{cartCount}}</ion-badge>
+          </div>
+         </ion-buttons>   
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>  
+      </div>
+    </div>   
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <div class="third_content" *ngIf="itemData" >
+    <ion-row>
+      <ion-col size="12">
+        <div class="content">           
+          <div class="sub_content">  
+            <ion-label>{{itemData.item_name}}</ion-label>                
+            <div class="price">
+              <ion-label>Price: &pound;{{itemData.item_price}}</ion-label>
+              <div class="btn" *ngIf="itemData.item_category != 'subscription'">                
+                Qty: <ion-label>{{itemData.item_qty}}</ion-label>              
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+  
+
+  <div class="third_content" *ngFor="let item of itemData.attendeelist;let i = index" >
+    <ion-row>
+      <ion-col size="12">
+        <div class="content">
+          <p>{{i+1}}. Attendee Details </p>          
+          <div class="sub_content">  
+            <ion-label class="title">First Name</ion-label>
+            <ion-item lines="none">
+              <ion-input type="text" placeholder="Your First Name"  id="firstname" name="firstname" value="{{item.firstname}}" (ionChange)="fnOnchangeinput($event,i)"></ion-input>
+            </ion-item>
+            <p class="erros_reg" id="efirstname"></p>	
+            <ion-label class="title">Last Name</ion-label>
+            <ion-item lines="none">
+              <ion-input type="text" placeholder="Your Last Name"  id="lastname" name="lastname" value="{{item.lastname}}" (ionChange)="fnOnchangeinput($event,i)"></ion-input>
+            </ion-item>
+            <p class="erros_reg" id="elastname"></p>	            
+            <ion-label class="title">Email</ion-label>
+            <ion-item lines="none">
+              <ion-input type="text" placeholder="Your Email Address" id="useremail" name="useremail" value="{{item.email}}" (ionChange)="fnOnchangeinput($event,i)"></ion-input>
+            </ion-item>
+            <p class="erros_reg" id="euseremail"></p>	            
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+  </ion-content>
+  <ion-footer class="ion-no-border">
+    <ion-toolbar>
+      <ion-button class="footbtn" slot="start" size="default" (click)="gotocart()">Basket</ion-button>
+      <ion-button class="footbtngreen" slot="end" size="default" (click)="onSubmitAtteendee()">Submit</ion-button>
+    </ion-toolbar>
+  </ion-footer>

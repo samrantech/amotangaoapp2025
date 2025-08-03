@@ -1,0 +1,82 @@
+<ion-header mode="md" class="ion-no-border">
+  <ion-toolbar>   
+    <div class="heading">
+      <div class="logo">
+        <div class="bg_img" [style.backgroundImage]='"url(\"" + appLogoPath + "\")"'></div>
+      </div>
+
+      <div class="btn"> 
+        <ion-buttons slot="start" (click)="gotonotifications()">
+          <div class="carticon"><ion-icon name="notifications-outline" ></ion-icon> 
+            <ion-badge color="danger" *ngIf="ncsCount">{{ncsCount}}</ion-badge>
+          </div>
+         </ion-buttons> 
+        <ion-buttons slot="start">
+          <div class="carticon"><ion-icon name="cart" ></ion-icon> 
+            <ion-badge color="danger">{{cartCount}}</ion-badge>
+          </div>
+         </ion-buttons>   
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>  
+      </div>
+    </div>   
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <div class="third_content" *ngIf="cartCount == ''" >
+    <p>Sorry! No items</p>
+  </div>
+
+    <div class="third_content" *ngFor="let item of cartItems" >
+      <ion-row>
+        <ion-col size="12">
+          <div class="content">           
+            <div class="sub_content">  
+              <ion-label>{{item.item_name}}</ion-label>                
+              <div class="price">
+                <ion-label [innerHTML]="'Price:' + partnerDetails.currency_symbol + item.item_price"></ion-label>
+                <div class="btn" *ngIf="item.item_category != 'subscription'">
+                  <ion-icon name="remove" *ngIf="item.item_qty > 1" (click) = "addUpdateCartQty(item,1)" ></ion-icon>
+                  <ion-label>{{item.item_qty}}</ion-label>
+                  <ion-icon name="add" (click) = "addUpdateCartQty(item,2)"></ion-icon>
+                </div>
+              </div>
+
+              <div *ngIf="item.item_qty > 1"><p>Addtional Attendee</p>
+              <p>We need the few details about your additional Attendee. You can update this information once you completed the booking. Would you like to update now?. If then please click the Add Addtional Atttendee button </p>
+              <ion-item button detail="true" (click)="updateAddtionalAtteendee(item)">
+                <ion-label>
+                  <h3>Additional Attendee(s)</h3>      
+                 </ion-label>
+              </ion-item>    
+            </div>
+  
+              <ion-buttons>
+                <ion-button (click)="removeCartItems(item)" color="light">
+                  <ion-icon name="close"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+  
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+</ion-content>
+<ion-footer class="ion-no-border" *ngIf="cartCount > 0">
+  <div class="bgprice">
+    <ion-label class="pricetag" [innerHTML]="'Total Amount:' + partnerDetails.currency_symbol + cartTotalAmount"></ion-label>
+  </div>
+  <ion-toolbar>
+    <ion-button class="footbtn" slot="start" size="default" (click)="gotohome()">Home</ion-button>
+    <ion-button class="footbtngreen" slot="end" size="default" (click)="oncheckout()">Proceed Checkout</ion-button>
+  </ion-toolbar>
+</ion-footer>
+<ion-footer class="ion-no-border" *ngIf="cartCount == ''"> 
+  <ion-toolbar>
+    <ion-button class="footbtn" slot="start" size="default" (click)="gotohome()">Home</ion-button>   
+  </ion-toolbar>
+</ion-footer>

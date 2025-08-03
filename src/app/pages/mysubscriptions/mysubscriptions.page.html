@@ -1,0 +1,55 @@
+<ion-header mode="md" class="ion-no-border">
+  <ion-toolbar>   
+    <div class="heading">
+      <ion-buttons slot="start">
+        <ion-button (click)="onBack()">
+          <ion-icon name="chevron-back"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <div class="logo">
+        <ion-title class="h5">My Subscriptions</ion-title>
+      </div>
+      <div class="btn"> 
+        <ion-buttons slot="start" (click)="gotonotifications()">
+          <div class="carticon"><ion-icon name="notifications-outline" ></ion-icon> 
+            <ion-badge color="danger" *ngIf="ncsCount">{{ncsCount}}</ion-badge>
+          </div>
+         </ion-buttons> 
+        <ion-buttons slot="start" (click)="gotocart()">
+          <div class="carticon"><ion-icon name="cart" ></ion-icon> 
+            <ion-badge color="danger" *ngIf="cartCount">{{cartCount}}</ion-badge>
+          </div>
+         </ion-buttons>   
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>  
+      </div>
+    </div>   
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <div class="scandata" *ngIf="subscriptionplans">
+    
+    <ion-card *ngFor="let item of subscriptionplans">
+      <ion-card-header>
+        <ion-card-title>{{item.subname}}</ion-card-title>
+        <ion-card-subtitle>Status: {{item.stacstatus}}</ion-card-subtitle>
+      </ion-card-header>  
+      <ion-card-content>
+        <p>Price: {{item.paid_amount}}</p>
+        <p>Next Renewal Date: {{item.next_renewal_date}}</p>
+        <p>Start Date: {{item.subscription_startdate}}</p>
+        <p>End Date: {{item.subscription_endate}}</p>
+        <ion-button fill="outline" size="small" class="content_button" (click)="onLoadEvents(item)">View Subcription</ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    
+</div>
+  <div class="scandata" *ngIf="activesbscount == 0">
+    There are no active Subscription
+  </div>
+  
+</ion-content>

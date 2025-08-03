@@ -1,0 +1,71 @@
+<ion-header mode="ios" class="ion-no-border">
+  <ion-toolbar>
+    <div class="logo">
+      <ion-title class="h5"><span>Filter Schedule</span></ion-title>
+    </div>
+    <ion-buttons slot="end">
+      <ion-button (click)="onClose()" color="dark">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="location">
+    <ion-label class="title">Course Day:</ion-label>
+    <ion-item lines="none">
+      <ion-select
+        placeholder="Select Day"
+        id="courseday"
+        name="courseday"
+        [(ngModel)]="filterData.filterDay"
+      >
+      <ion-select-option value="all" >All</ion-select-option> 
+      <ion-select-option value="{{cData.ddate}}" *ngFor="let cData of courseData.weekdays">{{cData.dday}}</ion-select-option> 
+      </ion-select>
+    </ion-item>
+    <ion-label class="title">Course Level:</ion-label>
+    <ion-item lines="none">
+      <ion-select
+        placeholder="Select Course Level"
+        id="courselevel"
+        name="courselevel"
+        [(ngModel)]="filterData.filerLevel"
+      >
+      <ion-select-option value="all" >All</ion-select-option> 
+      <ion-select-option value="{{cData.id}}" *ngFor="let cData of courseData.courselevels">{{cData.Level_title}}</ion-select-option> 
+      </ion-select>
+    </ion-item>
+    <ion-label class="title">Location:</ion-label>
+    <ion-item lines="none">
+      <ion-select
+        placeholder="Select Location"
+        id="courselocation"
+        name="courselocation"
+        [(ngModel)]="filterData.filterLocation"
+      >
+      <ion-select-option value="all" >All</ion-select-option> 
+      <ion-select-option value="{{cData.id}}" *ngFor="let cData of courseData.courselocations">{{cData.name}}</ion-select-option> 
+      </ion-select>
+    </ion-item>
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    <div class="btn">
+      <ion-button
+        class="contentbtn"
+        fill="outline"
+        expand="block"
+        (click)="onClose()"
+      >
+        Cancel
+      </ion-button>
+      <ion-button class="contentbtn" expand="block" (click)="onClose()">
+        Search
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

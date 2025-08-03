@@ -1,0 +1,46 @@
+<ion-header mode="ios" class="ion-no-border">
+  <ion-toolbar>
+    <div class="logo">
+      <ion-title class="h5"><span>{{arrUserpartners}}</span></ion-title>
+    </div>
+    <ion-buttons slot="end">
+      <ion-button (click)="onClose()" color="dark">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <div class="model_section">
+          <div>
+            <ion-card *ngFor="let item of arrUserpartners; index as i;">
+              <ion-card-header>
+             
+                <ion-card-title>{{item.title}}</ion-card-title>
+                <!-- <ion-card-subtitle>{{item.experience}}</ion-card-subtitle> -->
+              </ion-card-header>
+            
+            
+              <ion-row>           
+                <ion-col class="view_btn">
+                  <ion-button class="content_button">View</ion-button>
+                  </ion-col>
+              </ion-row>     
+            </ion-card>
+        
+         </div>
+             
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    <div class="btn">
+      <ion-button class="contentbtn" fill="outline" expand="block" (click)="onClose()">
+        Close
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>
