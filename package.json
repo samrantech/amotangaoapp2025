@@ -56,7 +56,7 @@
     "typescript": "~5.8.0"
   },
   "description": "An Ionic project",
-  "engines": {
+"engines": {
   "node": ">=20.19.0"
 }
 
